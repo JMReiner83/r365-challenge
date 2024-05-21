@@ -8,7 +8,7 @@ namespace R365.Challenge.Library.Tests
 
         [Theory]
         [InlineData("20", 20)]
-        [InlineData("1,5000", 5001)]
+        [InlineData("1,5000", 1)]
         [InlineData(null, 0)]
         [InlineData("1,2,3,4,5,6,7,8,9,10,11,12", 78)]
         [InlineData("1\n2,3", 6)]
