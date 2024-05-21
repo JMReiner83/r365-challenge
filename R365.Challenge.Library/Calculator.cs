@@ -6,7 +6,7 @@ namespace R365.Challenge.Library
     {
         public Calculator() { }
 
-        char Delimiter { get; init; } = ',';
+        char[] Delimiters { get; init; } = new[] { ',', '\n' };
 
         public int Add(string? args)
         {
@@ -20,7 +20,7 @@ namespace R365.Challenge.Library
 
         public IEnumerable<int> ParseArgs(string args)
         {
-            var splitArgs = args.Split(Delimiter);
+            var splitArgs = args.Split(Delimiters);
 
             return splitArgs.Select(a =>
             {
