@@ -9,7 +9,6 @@ namespace R365.Challenge.Library.Tests
         [Theory]
         [InlineData("20", 20)]
         [InlineData("1,5000", 5001)]
-        [InlineData("4,-3", 1)]
         [InlineData(null, 0)]
         [InlineData("1,2,3,4,5,6,7,8,9,10,11,12", 78)]
         [InlineData("1\n2,3", 6)]
@@ -17,6 +16,14 @@ namespace R365.Challenge.Library.Tests
         {
             var sum = _calculator.Add(args);
             Assert.Equal(expectedResult, sum);
+        }
+
+        [Theory]
+        [InlineData("-1")]
+        [InlineData("0,-1,-2")]
+        public void ParseArgs_ThrowsExWhenNegativeNumbers(string args)
+        {
+            Assert.Throws<ArgumentException>(() => _calculator.Add(args));
         }
 
         [Theory]

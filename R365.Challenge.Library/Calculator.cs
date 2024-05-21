@@ -22,11 +22,21 @@ namespace R365.Challenge.Library
         {
             var splitArgs = args.Split(Delimiters);
 
-            return splitArgs.Select(a =>
+            var integers = splitArgs.Select(a =>
             {
                 _ = Int32.TryParse(a, out int x);
                 return x;
             });
+
+
+            var negativeIntegers = integers.Where(x => x < 0).ToList();
+            if (negativeIntegers.Any())
+            {
+                throw new ArgumentException(
+                    $"Negative integers are not allowed ({String.Join(", ", negativeIntegers)})");
+            }
+
+            return integers;
         }
     }
 }
