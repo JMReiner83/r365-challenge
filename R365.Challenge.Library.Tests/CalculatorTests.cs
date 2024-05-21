@@ -11,17 +11,11 @@ namespace R365.Challenge.Library.Tests
         [InlineData("1,5000", 5001)]
         [InlineData("4,-3", 1)]
         [InlineData(null, 0)]
+        [InlineData("1,2,3,4,5,6,7,8,9,10,11,12", 78)]
         public void Add_SumsAllowedNumberOfAddends(string args, int expectedResult)
         {
             var sum = _calculator.Add(args);
             Assert.Equal(expectedResult, sum);
-        }
-
-        [Theory]
-        [InlineData("1,2,3")]
-        public void Add_ThrowsExWhenTooManyAddends(string args)
-        {
-            Assert.Throws<ArgumentException>(() => _calculator.Add(args));
         }
 
         [Theory]

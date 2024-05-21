@@ -22,11 +22,6 @@ namespace R365.Challenge.Library
         {
             var splitArgs = args.Split(Delimiter);
 
-            if (splitArgs.Count() > 2)
-            {
-                throw new ArgumentException("More than 2 numbers were provided.");
-            }
-
             return splitArgs.Select(a =>
             {
                 _ = Int32.TryParse(a, out int x);
