@@ -1,13 +1,17 @@
 ﻿using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace R365.Challenge.Library
 {
     public class Calculator
     {
-        public Calculator() { }
+        // Req 6: Support custom delimiter format
+        static readonly Regex CustomDelimiterFormat = new Regex($"//(?<delimiter>.){Environment.NewLine}(?<numbers>(.|\n)+)", RegexOptions.Multiline);
 
         // Req 3: Support newline delimiter in addition to comma
-        char[] Delimiters { get; init; } = new[] { ',', '\n' };
+        static readonly string[] DefaultDelimiters = new string[] { ",", Environment.NewLine };
+
+        public Calculator() { }
 
         public int Add(string? args)
         {
@@ -21,7 +25,24 @@ namespace R365.Challenge.Library
 
         public IEnumerable<int> ParseArgs(string args)
         {
-            var splitArgs = args.Split(Delimiters);
+            string[] splitArgs;
+
+            var customDelimiterMatch = CustomDelimiterFormat.Match(args);
+            if (customDelimiterMatch.Success)
+            {
+                // Split custom delimiter from numbers string.
+                string customDelimiter = customDelimiterMatch.Groups["delimiter"].Value;
+                var delimiters = DefaultDelimiters.Append(customDelimiter).ToArray();
+                
+                string numbers = customDelimiterMatch.Groups["numbers"].Value;
+
+                splitArgs = numbers.Split(delimiters, StringSplitOptions.None);
+            }
+            else
+            {
+                // Parse entire string as numbers
+                splitArgs = args.Split(DefaultDelimiters, StringSplitOptions.None);
+            }
 
             var integers = splitArgs.Select(a =>
             {

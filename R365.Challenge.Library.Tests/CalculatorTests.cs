@@ -7,11 +7,7 @@ namespace R365.Challenge.Library.Tests
         private Calculator _calculator = new Calculator();
 
         [Theory]
-        [InlineData("20", 20)]
-        [InlineData("1,5000", 1)]
-        [InlineData(null, 0)]
-        [InlineData("1,2,3,4,5,6,7,8,9,10,11,12", 78)]
-        [InlineData("1\n2,3", 6)]
+        [MemberData(nameof(CalculatorTestData.ValidInputsWithStandardDelimiters), MemberType = typeof(CalculatorTestData))]
         public void Add_SumsAllowedNumberOfAddends(string args, int expectedResult)
         {
             var sum = _calculator.Add(args);
@@ -19,29 +15,29 @@ namespace R365.Challenge.Library.Tests
         }
 
         [Theory]
-        [InlineData("-1")]
-        [InlineData("0,-1,-2")]
+        [MemberData(nameof(CalculatorTestData.ValidInputsWithCustomDelimiter), MemberType = typeof(CalculatorTestData))]
+        public void ParseArgs_HandlesCustomDelimiter(string args, int expectedResult)
+        {
+            var sum = _calculator.Add(args);
+            Assert.Equal(expectedResult, sum);
+        }
+
+        [Theory]
+        [MemberData(nameof(CalculatorTestData.InputsWithNegativeNumbers), MemberType = typeof(CalculatorTestData))]
         public void ParseArgs_ThrowsExWhenNegativeNumbers(string args)
         {
             Assert.Throws<ArgumentException>(() => _calculator.Add(args));
         }
 
         [Theory]
-        [InlineData("1,")]
-        [InlineData("5,tytyt")]
-        public void ParseArgs_ConvertsNonIntToZero(string args)
+        [MemberData(nameof(CalculatorTestData.InputsWithNonIntegralValues), MemberType = typeof(CalculatorTestData))]
+        public void ParseArgs_ConvertsNonIntToZero(string args, int expectedResult)
         {
             var parsedArgs = _calculator.ParseArgs(args);
             Assert.Equal(0, parsedArgs.ElementAt(1));
-        }
 
-        [Theory]
-        [InlineData("1,", 1)]
-        [InlineData("5,tytyt", 5)]
-        public void ParseArgs_ConvertsInt(string args, int expectedResult)
-        {
-            var parsedArgs = _calculator.ParseArgs(args);
-            Assert.Equal(expectedResult, parsedArgs.ElementAt(0));
+            var sum = _calculator.Add(args);
+            Assert.Equal(expectedResult, sum);
         }
     }
 }

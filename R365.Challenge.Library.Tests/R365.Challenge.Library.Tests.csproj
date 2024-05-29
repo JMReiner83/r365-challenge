@@ -30,4 +30,8 @@
     <ProjectReference Include="..\R365.Challenge.Library\R365.Challenge.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestResults\" />
+  </ItemGroup>
+
 </Project>
