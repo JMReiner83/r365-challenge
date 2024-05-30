@@ -13,8 +13,10 @@ namespace R365.Challenge.Cli
         static void Main(string[] args)
         {
             PrintWelcome();
-            ProcessInput();
-            PrintExit();
+            while (true)
+            {
+                ProcessInput();
+            }
         }
 
         private static void PrintWelcome()
@@ -58,6 +60,9 @@ namespace R365.Challenge.Cli
             Console.WriteLine();
 
             Console.WriteLine($"Type `{HelpCommand}` to see this message again.");
+            Console.WriteLine();
+
+            Console.WriteLine("Type Ctrl + C to quit.");
             Console.WriteLine();
         }
 
@@ -108,12 +113,8 @@ namespace R365.Challenge.Cli
             {
                 Console.WriteLine($"Unknown error: {ex.Message}");
             }
-        }
 
-        private static void PrintExit()
-        {
             Console.WriteLine();
-            Console.WriteLine("Press any key to exit...");
         }
     }
 }
