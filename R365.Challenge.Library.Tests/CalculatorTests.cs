@@ -4,7 +4,7 @@ namespace R365.Challenge.Library.Tests
 {
     public class CalculatorTests
     {
-        private Calculator _calculator = new Calculator();
+        private readonly Calculator _calculator = new();
 
         [Theory]
         [MemberData(nameof(CalculatorTestData.ValidInputsWithStandardDelimiters), MemberType = typeof(CalculatorTestData))]

@@ -7,10 +7,10 @@ namespace R365.Challenge.Library
     public class Calculator
     {
         // Req 6, 7, 8: Support custom delimiters
-        static readonly Regex CustomDelimiterFormat = new Regex($"//(?<delimiter1>.|(\\[(?<delimiter2>[^\\]]+)\\])+){Environment.NewLine}(?<numbers>(.|\n)+)", RegexOptions.Multiline);
+        static readonly Regex CustomDelimiterFormat = new($"//(?<delimiter1>.|(\\[(?<delimiter2>[^\\]]+)\\])+){Environment.NewLine}(?<numbers>(.|\n)+)", RegexOptions.Multiline);
 
         // Req 3: Support newline delimiter in addition to comma
-        static readonly string[] DefaultDelimiters = new string[] { ",", Environment.NewLine };
+        static readonly string[] DefaultDelimiters = [",", Environment.NewLine];
 
         public Calculator() { }
 
@@ -37,13 +37,13 @@ namespace R365.Challenge.Library
                 if (customDelimiters.Length > 0)
                 {
                     // Req 7, 8: Custom delimiter(s) of any length
-                    delimiters = DefaultDelimiters.Concat(customDelimiters.Captures.Select(c => c.Value)).ToArray();
+                    delimiters = [.. DefaultDelimiters, .. customDelimiters.Captures.Select(c => c.Value)];
                 }
                 else
                 {
                     // Req 6: Customer delimiter (single char)
                     string customDelimiter = customDelimiterMatch.Groups["delimiter1"].Value;
-                    delimiters = DefaultDelimiters.Append(customDelimiter).ToArray();
+                    delimiters = [.. DefaultDelimiters, customDelimiter];
                 }
 
                 string numbers = customDelimiterMatch.Groups["numbers"].Value;
