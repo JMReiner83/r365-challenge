@@ -2,7 +2,7 @@
 A simple console application which accepts string input to perform Add operations.
 
 ## CLI
-Build and execute the R365.Challenge.Cli exe. You will be prompted to input a string of numbers separated by comma and/or new line delimiters.
+Build and execute the R365.Challenge.Cli exe. You will be prompted to input a string of numbers separated by comma, new line, and/or custom delimiters.
 
 
 Empty values, non-integral values, and values greater than 1,000 will be treated as 0 (zero).
