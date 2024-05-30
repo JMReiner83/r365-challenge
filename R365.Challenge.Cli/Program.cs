@@ -98,7 +98,7 @@ namespace R365.Challenge.Cli
             {
                 var result = calculator.Add(input);
 
-                Console.WriteLine($"Result: {result}");
+                Console.WriteLine($"Result: {result.Formula}");
             }
             catch (ArgumentException aex)
             {

@@ -1,5 +1,3 @@
-using R365.Challenge.Library;
-
 namespace R365.Challenge.Library.Tests
 {
     public class CalculatorTests
@@ -10,16 +8,16 @@ namespace R365.Challenge.Library.Tests
         [MemberData(nameof(CalculatorTestData.ValidInputsWithStandardDelimiters), MemberType = typeof(CalculatorTestData))]
         public void Add_SumsAllowedNumberOfAddends(string args, int expectedResult)
         {
-            var sum = _calculator.Add(args);
-            Assert.Equal(expectedResult, sum);
+            var result = _calculator.Add(args);
+            Assert.Equal(expectedResult, result.Sum);
         }
 
         [Theory]
         [MemberData(nameof(CalculatorTestData.ValidInputsWithCustomDelimiter), MemberType = typeof(CalculatorTestData))]
         public void ParseArgs_HandlesCustomDelimiter(string args, int expectedResult)
         {
-            var sum = _calculator.Add(args);
-            Assert.Equal(expectedResult, sum);
+            var result = _calculator.Add(args);
+            Assert.Equal(expectedResult, result.Sum);
         }
 
         [Theory]
@@ -36,8 +34,8 @@ namespace R365.Challenge.Library.Tests
             var parsedArgs = _calculator.ParseArgs(args);
             Assert.Equal(0, parsedArgs.ElementAt(1));
 
-            var sum = _calculator.Add(args);
-            Assert.Equal(expectedResult, sum);
+            var result = _calculator.Add(args);
+            Assert.Equal(expectedResult, result.Sum);
         }
     }
 }

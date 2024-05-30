@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace R365.Challenge.Library
 {
@@ -14,14 +12,16 @@ namespace R365.Challenge.Library
 
         public Calculator() { }
 
-        public int Add(string? args)
+        public AddResult Add(string? args)
         {
             if (args == null)
             {
-                return 0;
+                return new([0]);
             }
 
-            return ParseArgs(args).Sum();
+            var numbers = ParseArgs(args);
+            var result = new AddResult(numbers);
+            return result;
         }
 
         public IEnumerable<int> ParseArgs(string args)
