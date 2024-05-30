@@ -8,7 +8,7 @@ namespace R365.Challenge.Cli
         const string HelpCommand = "help";
         static readonly string HelpCommandInput = $"{HelpCommand}{Environment.NewLine}";
 
-        private static readonly string LineTerminationSequence = $"{Environment.NewLine}{Environment.NewLine}";
+        private static readonly string InputTerminationSequence = $"{Environment.NewLine}{Environment.NewLine}";
 
         static void Main(string[] args)
         {
@@ -68,7 +68,7 @@ namespace R365.Challenge.Cli
             PrintPrompt();
 
             // Weird, but since we have to accept new lines in the input string, let's make two new lines the escape sequence.
-            while (!input.EndsWith(LineTerminationSequence))
+            while (!input.EndsWith(InputTerminationSequence))
             {
                 input += Convert.ToChar(Console.Read());
 
@@ -81,7 +81,7 @@ namespace R365.Challenge.Cli
                 }
             }
 
-            return input;
+            return input[..^InputTerminationSequence.Length];
         }
 
         private static void PrintPrompt()
