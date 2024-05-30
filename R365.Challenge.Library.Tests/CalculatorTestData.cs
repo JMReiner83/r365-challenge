@@ -21,20 +21,22 @@ namespace R365.Challenge.Library.Tests
 
     internal class CalculatorTestData
     {
-        public static IEnumerable<object[]> ValidInputsWithStandardDelimiters()
+        public static IEnumerable<object?[]> ValidInputsWithStandardDelimiters()
         {
-            yield return new object[] { "20", 20 };
-            yield return new object[] { "1,5000", 1 };
-            yield return new object[] { null, 0 };
-            yield return new object[] { "1,2,3,4,5,6,7,8,9,10,11,12", 78 };
-            yield return new object[] { $"1{Environment.NewLine}2,3", 6 };
+            yield return new object?[] { "20", 20 };
+            yield return new object?[] { "1,5000", 1 };
+            yield return new object?[] { null, 0 };
+            yield return new object?[] { "1,2,3,4,5,6,7,8,9,10,11,12", 78 };
+            yield return new object?[] { $"1{Environment.NewLine}2,3", 6 };
 
         }
 
         public static IEnumerable<object[]> ValidInputsWithCustomDelimiter()
         {
             yield return new object[] { $"//#{Environment.NewLine}2#5", 7 };
-
+            yield return new object[] { $"//,{Environment.NewLine}2,ff,100", 102 };
+            yield return new object[] { $"//[***]{Environment.NewLine}11***22***33", 66 };
+            yield return new object[] { $"//[*][!!][r9r]{Environment.NewLine}11r9r22*hh*33!!44", 110 };
         }
 
         public static IEnumerable<object[]> InputsWithNegativeNumbers()

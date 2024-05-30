@@ -33,22 +33,25 @@ namespace R365.Challenge.Cli
 
             Console.WriteLine("* Separated by a comma or new line [Enter key].");
             Console.WriteLine();
-            Console.WriteLine("  - Example #1:");
+            Console.WriteLine("  - Example:");
             Console.WriteLine("    1,2,3");
-            Console.WriteLine("    => 6");
-            Console.WriteLine();
-            Console.WriteLine("  - Example #2:");
-            Console.WriteLine("    1,2");
-            Console.WriteLine("    3");
             Console.WriteLine("    => 6");
             Console.WriteLine();
 
             Console.WriteLine("* Prefixed with custom delimiter using the format: //{delimiter}\\n{numbers}.");
             Console.WriteLine();
-            Console.WriteLine("  - Example #1:");
+            Console.WriteLine("  - Example:");
             Console.WriteLine("    //#");
             Console.WriteLine("    2#5");
             Console.WriteLine("    => 7");
+            Console.WriteLine();
+
+            Console.WriteLine("* Prefixed with custom delimiter(s) using the format: //[{delimiter}][{delimiter}]\\n{numbers}.");
+            Console.WriteLine();
+            Console.WriteLine("  - Example:");
+            Console.WriteLine("    //[*][!!][r9r]");
+            Console.WriteLine("    11r9r22*hh*33!!44");
+            Console.WriteLine("    => 110");
             Console.WriteLine();
 
             Console.WriteLine("Two consecutive new lines will terminate the input.");
